@@ -27,10 +27,12 @@ const AppSidebar = () => {
             <Sidebar collapsed={isCollapsed} rootStyles={{
                 [`.${sidebarClasses.container}`]: {
                     backgroundColor: colors.primary[400],
+                },
+                [`.${sidebarClasses.root}`]: {
                     borderColor: colors.primary[400],
                 }
             }}>
-                <Menu iconShape="square">
+                <Menu icon="square">
                     <MenuItem
                         onClick={() => setIsCollapsed(!isCollapsed)}
                         icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
