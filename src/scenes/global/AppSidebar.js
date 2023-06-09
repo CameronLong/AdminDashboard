@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Menu, MenuItem, Sidebar, sidebarClasses } from "react-pro-sidebar";
+import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
 import { Box, Icon, IconButton, Typography, useTheme } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { tokens } from '../../theme';
+import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined';
 import ContactsOutlinedIcon from '@mui/icons-material/ContactsOutlined';
@@ -17,6 +18,17 @@ import LineChartOutlinedIcon from '@mui/icons-material/StackedLineChartOutlined'
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 
+const Item = ({ title, to, icon, selected, setSelected }) => {
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+    return (
+        <MenuItem active={selected === title} style={{ color: colors.grey[100] }} onClick={() => setSelected(title)} icon={icon}>
+            <Typography>{title}</Typography>
+            <Link to={to} />
+        </MenuItem>
+    );
+}
+
 const AppSidebar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
@@ -24,16 +36,26 @@ const AppSidebar = () => {
     const [selected, setSelected] = useState("Dashboard");
 
     return (
-        <Box>
-            <Sidebar collapsed={isCollapsed} rootStyles={{
-                [`.${sidebarClasses.container}`]: {
-                    backgroundColor: colors.primary[400],
+        <Box
+            sx={{
+                "& .pro-sidebar-inner": {
+                    background: `${colors.primary[400]} !important`,
                 },
-                [`.${sidebarClasses.root}`]: {
-                    borderColor: colors.primary[400],
-                }
+                "& .pro-icon-wrapper": {
+                    backgroundColor: "transparent !important",
+                },
+                "& .pro-inner-item": {
+                    padding: "5px 35px 5px 20px !important",
+                },
+                "& .pro-inner-item:hover": {
+                    color: "#868dfb !important",
+                },
+                "& .pro-menu-item.active": {
+                    color: "#6870fa !important",
+                },
             }}>
-                <Menu icon="square">
+            <ProSidebar collapsed={isCollapsed}>
+                <Menu iconShape="square">
                     <MenuItem
                         onClick={() => setIsCollapsed(!isCollapsed)}
                         icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -73,76 +95,100 @@ const AppSidebar = () => {
                         </Box>
                     )}
                     <Box paddingLeft={isCollapsed ? undefined : '10%'}>
-                        <MenuItem
+                        <Item
+                            title={'Dashboard'}
                             to="/"
                             icon={<HomeOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Dashboard</MenuItem>
-                        <MenuItem
+                        />
+
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >Data</Typography>
+
+                        <Item
+                            title={'Manage Team'}
                             to="/team"
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Team</MenuItem>
-                        <MenuItem
+                        />
+                        <Item
+                            title={'Contacts Information'}
                             to="/contacts"
                             icon={<ContactsOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Contacts Information</MenuItem>
-                        <MenuItem
+                        />
+                        <Item
+                            title={'Invoices Balances'}
                             to="/invoices"
                             icon={<ReceiptOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Invoices Balances </MenuItem>
-                        <MenuItem
-                            to="/form"
-                            icon={<PersonOutlinedIcon />}
-                            selected={selected}
-                            setSelected={setSelected}
-                        >Profile Form </MenuItem>
-                        <MenuItem
+                        />
+
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >Pages</Typography>
+
+                        <Item
+                            title={'Calendar'}
                             to="/calendar"
                             icon={<CalendarTodayOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Calendar </MenuItem>
-                        <MenuItem
+                        />
+                        <Item
+                            title={'FAQ Page'}
                             to="/faq"
                             icon={<HelpOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >FAQ page</MenuItem>
-                        <MenuItem
+                        />
+
+                        <Typography
+                            variant="h6"
+                            color={colors.grey[300]}
+                            sx={{ m: "15px 0 5px 20px" }}
+                        >Charts</Typography>
+
+                        <Item
+                            title={'Bar Chart'}
                             to="/bar"
                             icon={<BarChartOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Bar Chart </MenuItem>
-                        <MenuItem
+                        />
+                        <Item
+                            title={'Pie Chart'}
                             to="/pie"
                             icon={<PieChartOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Pie Chart </MenuItem>
-                        <MenuItem title="Line Chart"
+                        />
+                        <Item
+                            title={'Line Chart'}
                             to="/line"
-                            icon={<LineChartOutlinedIcon />}
+                            icon={<TimelineOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Line Chart </MenuItem>
-                        <MenuItem title="Geography Chart"
+                        />
+                        <Item
+                            title={'Geography Chart'}
                             to="/geography"
                             icon={<MapOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        >Geography Chart </MenuItem>
+                        />
                     </Box>
                 </Menu>
-            </Sidebar>
-
+            </ProSidebar>
         </Box>
     );
 }
