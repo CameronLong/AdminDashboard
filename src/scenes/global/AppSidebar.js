@@ -136,7 +136,13 @@ const AppSidebar = () => {
                             color={colors.grey[300]}
                             sx={{ m: "15px 0 5px 20px" }}
                         >Pages</Typography>
-
+                        <Item
+                            title={'Profile Form'}
+                            to="/form"
+                            icon={<PersonOutlinedIcon />}
+                            selected={selected}
+                            setSelected={setSelected}
+                        />
                         <Item
                             title={'Calendar'}
                             to="/calendar"
