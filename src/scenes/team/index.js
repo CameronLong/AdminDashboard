@@ -97,11 +97,11 @@ const Team = () => {
             }}
             >
                 <DataGrid
-                    rows={
-                        axios.get('http://localhost:5001/getTeam')
-                        .then((response) => {
-                            console.log(response.team);
-                        })
+                    rows={ mockDataTeam
+                        // axios.get('http://localhost:5001/getTeam')
+                        // .then((response) => {
+                        //     console.log(response.team);
+                        // })
                     }
                     columns={columns}
                 />
