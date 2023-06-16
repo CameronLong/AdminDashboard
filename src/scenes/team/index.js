@@ -6,6 +6,7 @@ import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettin
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
+import axios from 'axios';
 
 const Team = () => {
     const theme = useTheme();
@@ -96,7 +97,12 @@ const Team = () => {
             }}
             >
                 <DataGrid
-                    rows={mockDataTeam}
+                    rows={
+                        axios.get('http://localhost:5001/getTeam')
+                        .then((response) => {
+                            console.log(response.team);
+                        })
+                    }
                     columns={columns}
                 />
             </Box>
