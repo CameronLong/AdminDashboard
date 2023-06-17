@@ -13,7 +13,7 @@ const Team = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const columns = [
-        { field: "_id", headerName: "ID" },
+        { field: "id", headerName: "ID" },
         {
             field: "username",
             headerName: "Username",
@@ -26,12 +26,6 @@ const Team = () => {
             flex: 1,
         },
         {
-            field: "password",
-            headerName: "Password",
-            flex: 1,
-            cellClassName: "name-column--cell"
-        },
-        {
             field: "name",
             headerName: "Name",
             flex: 1,
@@ -41,7 +35,7 @@ const Team = () => {
             field: "status",
             headerName: "Access Level",
             flex: 1,
-            renderCell: ({ row: { access } }) => {
+            renderCell: ({ row: { status } }) => {
                 return (
                     <Box
                         width={'60%'}
@@ -50,17 +44,17 @@ const Team = () => {
                         display='flex'
                         justifyContent={'center'}
                         backgroundColor={
-                            access === 'admin'
+                            status === 'admin'
                                 ? colors.greenAccent[600]
                                 : colors.greenAccent[700]
                         }
                         borderRadius={'4px'}
                     >
-                        {access === 'admin' && <AdminPanelSettingsOutlinedIcon />}
-                        {access === 'manager' && <SecurityOutlinedIcon />}
-                        {access === 'user' && <LockOpenOutlinedIcon />}
+                        {status === 'admin' && <AdminPanelSettingsOutlinedIcon />}
+                        {status === 'manager' && <SecurityOutlinedIcon />}
+                        {status === 'user' && <LockOpenOutlinedIcon />}
                         <Typography color={colors.grey[100]} sx={{ ml: '5px' }}>
-                            {access}
+                            {status}
                         </Typography>
                     </Box>
                 )
@@ -73,7 +67,10 @@ const Team = () => {
     useEffect(() => {
         const getTeam = async () => {
             await axios.get('http://localhost:5001/getTeam')
-                .then((response) => setTeamArray(response.team))
+                // .then((response) => {
+                //     console.log("Team: " + response.data.team);
+                // })
+                .then((response) => setTeamArray(response.data.team))
         }
         getTeam();
     }, []);
