@@ -44,6 +44,8 @@ const Form = () => {
             lastName: values.lastName,
             username: values.username,
             email: values.email,
+            phone: values.contact,
+            address1: values.address1,
             password: passwordHash,
             status: values.status
         });

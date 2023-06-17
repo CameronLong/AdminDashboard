@@ -6,9 +6,29 @@ import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import axios from 'axios';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import SplitButton from "../global/SplitButton";
 
 const Team = () => {
+    //Pop up handlers
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const columns = [
@@ -48,19 +68,32 @@ const Team = () => {
                         p='5px'
                         display='flex'
                         justifyContent={'center'}
+                        borderRadius={'4px'}
                         backgroundColor={
                             status === 'admin'
                                 ? colors.greenAccent[600]
                                 : colors.greenAccent[700]
                         }
-                        borderRadius={'4px'}
                     >
                         {status === 'admin' && <AdminPanelSettingsOutlinedIcon />}
                         {status === 'manager' && <SecurityOutlinedIcon />}
                         {status === 'user' && <LockOpenOutlinedIcon />}
-                        <Typography color={colors.grey[100]} sx={{ ml: '5px' }}>
+                        <Button variant="text" onClick={handleClickOpen}>
                             {status}
-                        </Typography>
+                        </Button>
+                        <Dialog open={open} onClose={handleClose}>
+                            <DialogTitle>Edit user</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText>
+                                    Please select a value to change from the drop down below.
+                                </DialogContentText>
+                                <SplitButton />
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose}>Cancel</Button>
+                                <Button onClick={handleClose}>Save</Button>
+                            </DialogActions>
+                        </Dialog>
                     </Box>
                 )
             }
@@ -72,9 +105,6 @@ const Team = () => {
     useEffect(() => {
         const getTeam = async () => {
             await axios.get('http://localhost:5001/getTeam')
-                // .then((response) => {
-                //     console.log("Team: " + response.data.team);
-                // })
                 .then((response) => setTeamArray(response.data.team))
         }
         getTeam();

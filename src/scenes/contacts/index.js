@@ -1,9 +1,11 @@
 import { Box, Grid } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from '../../theme';
-import { mockDataContacts } from '../../data/mockData';
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
+
+import axios from 'axios';
+import { useEffect, useState } from "react";
 
 const Team = () => {
     const theme = useTheme();
@@ -11,19 +13,17 @@ const Team = () => {
     
     const columns = [
         { field: "id", headerName: "ID", flex: 0.5 },
-        { field: "registrarId", headerName: "Registrar ID"},
         {
-            field: "name",
-            headerName: "Name",
+            field: "firstName",
+            headerName: "First Name",
             flex: 1,
             cellClassName: "name-column--cell"
         },
         {
-            field: "age",
-            headerName: "Age",
-            type: "number",
-            headerAlign: "left",
-            align: "left",
+            field: "lastName",
+            headerName: "Last Name",
+            flex: 1,
+            cellClassName: "name-column--cell"
         },
         {
             field: "phone",
@@ -36,21 +36,23 @@ const Team = () => {
             flex: 1,
         },
         {
-            field: "address",
+            field: "address1",
             headerName: "Address",
             flex: 1,
         },
-        {
-            field: "city",
-            headerName: "Citys",
-            flex: 1,
-        },
-        {
-            field: "zipCode",
-            headerName: "Zip Code",
-            flex: 1,
-        },
     ]
+
+    const [teamArray, setTeamArray] = useState([]);
+    useEffect(() => {
+        const getTeam = async () => {
+            await axios.get('http://localhost:5001/getTeam')
+                // .then((response) => {
+                //     console.log("Team: " + response.data.team);
+                // })
+                .then((response) => setTeamArray(response.data.team))
+        }
+        getTeam();
+    }, []);
 
     return (
         <Box m='20px'>
@@ -85,7 +87,7 @@ const Team = () => {
             }}
             >
                 <DataGrid
-                    rows={mockDataContacts}
+                    rows={teamArray}
                     columns={columns}
                     components={{Toolbar: GridToolbar}}
                 />
