@@ -1,7 +1,6 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from '../../theme';
-import { mockDataTeam } from '../../data/mockData';
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
@@ -15,6 +14,18 @@ const Team = () => {
     const columns = [
         { field: "id", headerName: "ID" },
         {
+            field: "firstName",
+            headerName: "First Name",
+            flex: 1,
+            cellClassName: "name-column--cell"
+        },
+        {
+            field: "lastName",
+            headerName: "Last Name",
+            flex: 1,
+            cellClassName: "name-column--cell"
+        },
+        {
             field: "username",
             headerName: "Username",
             flex: 1,
@@ -24,12 +35,6 @@ const Team = () => {
             field: "email",
             headerName: "Email",
             flex: 1,
-        },
-        {
-            field: "name",
-            headerName: "Name",
-            flex: 1,
-            cellClassName: "name-column--cell"
         },
         {
             field: "status",
