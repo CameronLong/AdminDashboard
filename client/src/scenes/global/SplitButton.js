@@ -9,9 +9,9 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 
-const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
+// const options = ['Create a merge commit', 'Squash and merge', 'Rebase and merge'];
 
-export default function SplitButton() {
+export default function SplitButton({ options }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
   const [selectedIndex, setSelectedIndex] = React.useState(1);
@@ -76,7 +76,6 @@ export default function SplitButton() {
                   {options.map((option, index) => (
                     <MenuItem
                       key={option}
-                      disabled={index === 2}
                       selected={index === selectedIndex}
                       onClick={(event) => handleMenuItemClick(event, index)}
                     >

@@ -14,11 +14,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import SplitButton from "../global/SplitButton";
 
 const Team = () => {
     //Pop up handlers
-
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -87,7 +85,110 @@ const Team = () => {
                                 <DialogContentText>
                                     Please select a value to change from the drop down below.
                                 </DialogContentText>
-                                <SplitButton />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Id"
+                                    type="text"
+                                    variant="outlined"
+                                    sx={{
+                                        mr: '8px'
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Username"
+                                    type="text"
+                                    variant="outlined"
+                                    sx={{
+                                        mr: '8px'
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="First Name"
+                                    type="text"
+                                    variant="outlined"
+                                    sx={{
+                                        mr: '8px'
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Last Name"
+                                    type="text"
+                                    variant="outlined"
+                                    sx={{
+                                        mr: '8px'
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Email Address"
+                                    fullWidth
+                                    type="email"
+                                    variant="outlined"
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Contact Number"
+                                    fullWidth
+                                    type="text"
+                                    variant="outlined"
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Address 1"
+                                    fullWidth
+                                    type="text"
+                                    variant="outlined"
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Password"
+                                    type="password"
+                                    variant="outlined"
+                                    sx={{
+                                        mr: '8px'
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Confirm Password"
+                                    type="password"
+                                    variant="outlined"
+                                    sx={{
+                                        mr: '8px'
+                                    }}
+                                />
+                                <TextField
+                                    autoFocus
+                                    margin="normal"
+                                    id="name"
+                                    label="Access Level"
+                                    type="text"
+                                    variant="outlined"
+                                    sx={{
+                                        mr: '8px'
+                                    }}
+                                />
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose}>Cancel</Button>
