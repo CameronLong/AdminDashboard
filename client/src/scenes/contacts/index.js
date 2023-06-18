@@ -45,7 +45,7 @@ const Team = () => {
     const [teamArray, setTeamArray] = useState([]);
     useEffect(() => {
         const getTeam = async () => {
-            await axios.get('/getTeam')
+            await axios.get('http://localhost:5001/getTeam')
                 // .then((response) => {
                 //     console.log("Team: " + response.data.team);
                 // })
