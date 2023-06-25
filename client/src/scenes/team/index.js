@@ -14,6 +14,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import CellSelectionFormulaField from "../../components/DataGrid";
 
 const Team = () => {
     //Pop up handlers
@@ -240,10 +241,7 @@ const Team = () => {
                     }
                 }}
             >
-                <DataGrid
-                    rows={teamArray}
-                    columns={columns}
-                />
+                <CellSelectionFormulaField team={teamArray}/>
             </Box>
         </Box>
     )
