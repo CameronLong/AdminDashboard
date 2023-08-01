@@ -1,0 +1,113 @@
+.table-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    height: 100vh;
+    width: 100%;
+}
+
+.table-wrapper {
+    width: 100%;
+}
+
+.table {
+    display: block;
+    overflow: hidden;
+    table-layout: auto;
+    border-collapse: collapse;
+    border-radius: 4px;
+    white-space: nowrap;
+    width: 100em;
+    max-width: 80%;
+    margin: auto;
+    overflow-x: auto;
+    background-color: #1F2A40;
+}
+
+.table thead{
+    background-color: #3e4396;
+    color: white;
+    border: none;
+}
+
+.table th, .table td {
+    padding: 0.8rem;
+}
+
+.table td {
+    border-top: 0.5px solid #ddd;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table tbody tr:hover{
+    background-color: rgba(69, 69, 69, 0.684);
+}
+
+.expand{
+    width: 30%;
+}
+
+.label {
+    border-radius: 3px;
+    padding: 0.3rem;
+    color: white;
+}
+
+.label-user {
+    background-color: #777;
+}
+
+.label-admin {
+    background-color: #42a942;
+}
+
+.label-error {
+    background-color: #d6534f;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.action svg {
+    cursor: pointer;
+}
+
+.delete-btn {
+    color: #e10d05;
+}
+
+.btn {
+    margin-top: 1rem;
+    border: none;
+    background-color: #1d4ed8;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
+
+.form-group input,
+.form-group select {
+    border: 1px solid black;
+    border-radius: 0.3rem;
+    padding: 0.3rem;
+    font-size: 1rem;
+}
+
+.form-group label{
+    margin-bottom: 0.2rem;
+}
+
+.table-row {
+    color: #94e2cd;
+}
