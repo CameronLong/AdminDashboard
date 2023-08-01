@@ -1,54 +1,52 @@
-import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import { BsFillPencilFill, BsFillTrashFill } from "react-icons/bs";
-import "../css/Table.css";
+import React, {useState, useEffect} from 'react'; // Importing necessary modules from the react library
+import axios from 'axios'; // Importing axios module for making HTTP requests
+import { BsFillPencilFill, BsFillTrashFill } from "react-icons/bs"; // Importing specific icons from react-icons library
+import "../css/Table.css"; // Importing custom CSS file
 
-const DataGrid = ({ deleteRow, editRow }) => {
-    const [teamArray, setTeamArray] = useState([]);
+const DataGrid = ({ deleteRow, editRow }) => { 
+    const [teamArray, setTeamArray] = useState([]); // Declaring a state variable teamArray and setting its initial value as an empty array
     useEffect(() => {
-        const getTeam = async () => {
-            await axios.get('http://localhost:5001/getTeam')
-                // .then((response) => {
-                //     console.log("Team: " + response.data.team);
-                // })
-                .then((response) => setTeamArray(response.data.team))
+        const getTeam = async () => { // Defining an asynchronous function that fetches data from the server
+            await axios.get('http://localhost:5001/getTeam') // Making a GET request to 'http://localhost:5001/getTeam'
+                .then((response) => setTeamArray(response.data.team)) // Updating the state variable teamArray with the response data
         }
-        getTeam();
-    }, []);
+        getTeam(); // Calling the asynchronous function getTeam inside the useEffect hook
+        
+    }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
 
-    return <>
-        <div className='table-wrapper'>
-            <table className='table'>
-                <thead className='expand'>
-                    <tr className='expand'>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+    return <> // Using a React fragment to wrap multiple elements without introducing an additional node
+        <div className='table-wrapper'> // Creating a div element with class name 'table-wrapper'
+            <table className='table'> // Creating a table element with class name 'table'
+                <thead className='expand'> // Creating the table header with class name 'expand'
+                    <tr className='expand'> // Creating a table row with class name 'expand'
+                        <th>ID</th> // Creating a table heading cell with text 'ID'
+                        <th>First Name</th> // Creating a table heading cell with text 'First Name'
+                        <th>Last Name</th> // Creating a table heading cell with text 'Last Name'
+                        <th>Username</th> // Creating a table heading cell with text 'Username'
+                        <th>Email</th> // Creating a table heading cell with text 'Email'
+                        <th>Status</th> // Creating a table heading cell with text 'Status'
+                        <th>Actions</th> // Creating a table heading cell with text 'Actions'
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        teamArray.map((row, idx) => {
+                        teamArray.map((row, idx) => { // Using the map function to iterate over each element in teamArray and render a table row for each element
 
-                            const statusText = row.status.charAt(0).toUpperCase() + row.status.slice(1);
+                            const statusText = row.status.charAt(0).toUpperCase() + row.status.slice(1); // Capitalizing the first letter of the status string
                             return (
-                                <tr key={idx} className='table-row'>
-                                    <td>{row.id}</td>
-                                    <td className='expand'>{row.firstName}</td>
-                                    <td className='expand'>{row.lastName}</td>
-                                    <td className='expand'>{row.username}</td>
-                                    <td className='expand'>{row.email}</td>
+                                <tr key={idx} className='table-row'> // Creating a table row with a unique key value and class name 'table-row'
+                                    <td>{row.id}</td> // Creating a table data cell with the id value
+                                    <td className='expand'>{row.firstName}</td> // Creating a table data cell with the firstName value
+                                    <td className='expand'>{row.lastName}</td> // Creating a table data cell with the lastName value
+                                    <td className='expand'>{row.username}</td> // Creating a table data cell with the username value
+                                    <td className='expand'>{row.email}</td> // Creating a table data cell with the email value
                                     <td>
-                                        <span className={`label label-${row.status}`}>{statusText}</span>
+                                        <span className={`label label-${row.status}`}>{statusText}</span> // Creating a span element with dynamic class name and statusText as its content
                                     </td>
                                     <td>
-                                        <span className='actions'>
-                                            <BsFillTrashFill className='delete-btn' onClick={() => deleteRow(idx)}/>
-                                            <BsFillPencilFill onClick={() => editRow(idx)} />
+                                        <span className='actions'> // Creating a span element with class name 'actions'
+                                            <BsFillTrashFill className='delete-btn' onClick={() => deleteRow(idx)}/> // Using the deleteRow function when the trash icon is clicked
+                                            <BsFillPencilFill onClick={() => editRow(idx)} /> // Using the editRow function when the pencil icon is clicked
                                         </span>
                                     </td>
                                 </tr>
@@ -61,4 +59,4 @@ const DataGrid = ({ deleteRow, editRow }) => {
     </>
 }
 
-export default DataGrid;
+export default DataGrid; // Exporting the DataGrid component
