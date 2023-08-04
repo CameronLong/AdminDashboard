@@ -31,6 +31,8 @@ const Team = () => {
             setRows(rows.map((currRow, idx) => {
                 if (idx !== rowToEdit) return currRow;
 
+                console.log(currRow.username);
+
                 return newRow;
             }))
     }

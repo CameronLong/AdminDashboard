@@ -15,7 +15,7 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
     const [errors, setErrors] = useState("");
 
     const validateForm = () => {
-        if(formState.id && formState.firstName && formState.lastName && formState.username && formState.email && formState.status){
+        if(document.getElementsByName('id').value && formState.firstName && formState.lastName && formState.username && formState.email && formState.status){
             setErrors("");
             return true;
         } else {
@@ -58,21 +58,21 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
                 <form>
                     <div className='form-group'>
                         <label htmlFor='id'>ID</label>
-                        <input name='id' value={formState.id}/>
+                        <input name='id' placeholder={formState.id}/>
                         <label htmlFor='username'>Username</label>
-                        <input name='username' value={formState.username} onChange={handleChange}/>
+                        <input name='username' placeholder={formState.username} onChange={handleChange}/>
                     </div>
                     <div className='form-group'>
                         <label htmlFor='fName'>First Name</label>
-                        <input name='fName' value={formState.firstName} onChange={handleChange}/>
+                        <input name='fName' placeholder={formState.firstName} onChange={handleChange}/>
                         <label htmlFor='lName'>Last Name</label>
-                        <input name='lName' value={formState.lastName} onChange={handleChange}/>
+                        <input name='lName' placeholder={formState.lastName} onChange={handleChange}/>
                     </div>
                     <div className='form-group'>
                         <label htmlFor='status'>Status</label>
-                        <select name='status' value={formState.status} onChange={handleChange}>
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
+                        <select name='status' placeholder={formState.status} onChange={handleChange}>
+                            <option placeholder="user">User</option>
+                            <option placeholder="admin">Admin</option>
                         </select>
                     </div>
                     {errors && <div className='error'>{`Please include: ${errors}`}</div>}
