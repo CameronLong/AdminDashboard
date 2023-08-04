@@ -1,18 +1,8 @@
-import React, {useState, useEffect} from 'react'; // Importing necessary modules from the react library
-import axios from 'axios'; // Importing axios module for making HTTP requests
+import React from 'react'; // Importing necessary modules from the react library
 import { BsFillPencilFill, BsFillTrashFill } from "react-icons/bs"; // Importing specific icons from react-icons library
 import "../css/Table.css"; // Importing custom CSS file
 
-const DataGrid = ({ deleteRow, editRow }) => { 
-    const [teamArray, setTeamArray] = useState([]); // Declaring a state variable teamArray and setting its initial value as an empty array
-    useEffect(() => {
-        const getTeam = async () => { // Defining an asynchronous function that fetches data from the server
-            await axios.get('http://localhost:5001/getTeam') // Making a GET request to 'http://localhost:5001/getTeam'
-                .then((response) => setTeamArray(response.data.team)) // Updating the state variable teamArray with the response data
-        }
-        getTeam(); // Calling the asynchronous function getTeam inside the useEffect hook
-        
-    }, []); // The empty dependency array ensures that the effect runs only once when the component mounts
+const DataGrid = ({ rows, deleteRow, editRow }) => { 
 
     return <> {/* Using a React fragment to wrap multiple elements without introducing an additional node */}
         <div className='table-wrapper'> { /* Creating a div element with class name 'table-wrapper' */}
@@ -30,7 +20,7 @@ const DataGrid = ({ deleteRow, editRow }) => {
                 </thead>
                 <tbody>
                     {
-                        teamArray.map((row, idx) => { {/* Using the map function to iterate over each element in teamArray and render a table row for each element */}
+                        rows.map((row, idx) => { {/* Using the map function to iterate over each element in teamArray and render a table row for each element */}
 
                             const statusText = row.status.charAt(0).toUpperCase() + row.status.slice(1); {/* Capitalizing the first letter of the status string */}
                             return (

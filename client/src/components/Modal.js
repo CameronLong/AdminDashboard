@@ -8,14 +8,21 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
         firstName: "",
         lastName: "",
         username: "",
-        name: "",
+        email: "",
         status: "user"
     });
+
+    const handleChange = (e) => {
+        setFormState({
+            ...formState,
+            [e.target.name]: e.target.value
+        })
+    };
 
     const [errors, setErrors] = useState("");
 
     const validateForm = () => {
-        if(document.getElementsByName('id').value && formState.firstName && formState.lastName && formState.username && formState.email && formState.status){
+        if(formState.id && formState.firstName && formState.lastName && formState.username && formState.email && formState.status){
             setErrors("");
             return true;
         } else {
@@ -28,13 +35,6 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
             setErrors(errorFields.join(", "));
             return false;
         }
-    };
-
-    const handleChange = (e) => {
-        setFormState({
-            ...formState,
-            [e.target.name]: e.target.value
-        })
     };
 
     const handleSubmit = (e) => {
@@ -58,21 +58,23 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
                 <form>
                     <div className='form-group'>
                         <label htmlFor='id'>ID</label>
-                        <input name='id' placeholder={formState.id}/>
+                        <input name='id' value={formState.id} onChange={handleChange}/>
                         <label htmlFor='username'>Username</label>
-                        <input name='username' placeholder={formState.username} onChange={handleChange}/>
+                        <input name='username' value={formState.username} onChange={handleChange}/>
+                        <label htmlFor='email'>Email</label>
+                        <input name='email' value={formState.email} onChange={handleChange}/>
                     </div>
                     <div className='form-group'>
                         <label htmlFor='fName'>First Name</label>
-                        <input name='fName' placeholder={formState.firstName} onChange={handleChange}/>
+                        <input name='firstName' value={formState.firstName} onChange={handleChange}/>
                         <label htmlFor='lName'>Last Name</label>
-                        <input name='lName' placeholder={formState.lastName} onChange={handleChange}/>
+                        <input name='lastName' value={formState.lastName} onChange={handleChange}/>
                     </div>
                     <div className='form-group'>
                         <label htmlFor='status'>Status</label>
-                        <select name='status' placeholder={formState.status} onChange={handleChange}>
-                            <option placeholder="user">User</option>
-                            <option placeholder="admin">Admin</option>
+                        <select name='status' value={formState.status} onChange={handleChange}>
+                            <option value="user">User</option>
+                            <option value="admin">Admin</option>
                         </select>
                     </div>
                     {errors && <div className='error'>{`Please include: ${errors}`}</div>}

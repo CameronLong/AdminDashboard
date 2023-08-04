@@ -38,7 +38,7 @@ const Form = () => {
 
         const passwordHash =  bcrypt.hashSync(values.password, 10);
 
-        axios.post('/newuser', {
+        axios.post('http://localhost:5001/newuser', {
             id: values.id,
             firstName: values.firstName,
             lastName: values.lastName,
