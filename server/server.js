@@ -18,6 +18,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
+
 var storage = multer.diskStorage({           // Store uploaded files with multer
     destination: (req, file, cb) => {        // Destination directory for uploaded files
         cb(null, 'uploads')
@@ -42,6 +43,9 @@ app.use(session({                        // Set up session middleware
 }));
 app.use(passport.initialize());          // Initialize passport authentication middleware
 app.use(passport.session());             // Use the same Passport session across multiple requests
+
+var cors = require('cors');
+app.use(cors());
 
 
 app.use(express.static(__dirname + '/public'));      // Set up a static directory for Express
@@ -279,6 +283,32 @@ app.route("/newuser")
 
 
         User.create({ id: id, firstName: firstName, lastName: lastName, username: username, email: email, phone: phone, address1: address1, password: password, status: status });
+    })
+
+app.route("/updateUser")
+    .post(function (req, res) {
+        const id = req.body.id;
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+        const username = req.body.username; //Change this variable when front end is complete
+        const email = req.body.email;
+        const phone = req.body.phone;
+        const address1 = req.body.address1;
+        const status = req.body.status;
+
+        // console.log(id, firstName, lastName, username, email, phone, address1, status);
+
+        User.updateOne({
+            id: id,
+            firstName: firstName,
+            lastName: lastName,
+            username: username,
+            email: email,
+            phone: phone,
+            address1: address1,
+            status: status
+        });
+        console.log("Finished updating")
     })
 
 app.route("/adminPortal")

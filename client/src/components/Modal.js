@@ -7,6 +7,8 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
         id: "",
         firstName: "",
         lastName: "",
+        phone: "",
+        address1: "",
         username: "",
         email: "",
         status: "user"
@@ -44,6 +46,8 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
 
         onSubmit(formState);
 
+        
+
         closeModal();
     };
 
@@ -69,6 +73,10 @@ const Modal = ({ closeModal, onSubmit, defaultValue }) => {
                         <input name='firstName' value={formState.firstName} onChange={handleChange}/>
                         <label htmlFor='lName'>Last Name</label>
                         <input name='lastName' value={formState.lastName} onChange={handleChange}/>
+                        <label htmlFor='phoneNumber'>Phone Number</label>
+                        <input name='phoneNumber' value={formState.phone} onChange={handleChange}/>
+                        <label htmlFor='address'>Address</label>
+                        <input name='address' value={formState.address1} onChange={handleChange}/>
                     </div>
                     <div className='form-group'>
                         <label htmlFor='status'>Status</label>
