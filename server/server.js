@@ -45,7 +45,11 @@ app.use(passport.initialize());          // Initialize passport authentication m
 app.use(passport.session());             // Use the same Passport session across multiple requests
 
 var cors = require('cors');
-app.use(cors());
+
+const corsOptions = {
+    origin: 'http://localhost:3000'
+}
+app.use(cors(corsOptions));
 
 
 app.use(express.static(__dirname + '/public'));      // Set up a static directory for Express
@@ -298,7 +302,7 @@ app.route("/updateUser")
 
         // console.log(id, firstName, lastName, username, email, phone, address1, status);
 
-        User.updateOne({
+        User.findOneAndUpdate({
             id: id,
             firstName: firstName,
             lastName: lastName,

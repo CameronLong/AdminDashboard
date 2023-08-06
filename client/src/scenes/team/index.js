@@ -5,8 +5,6 @@ import Header from "../../components/Header";
 import '../../css/Table.css';
 import React, { useState, useEffect } from 'react'; // Importing necessary modules from the react library
 import axios from 'axios'; // Importing axios module for making HTTP requests
-import { BsCurrencyBitcoin } from "react-icons/bs";
-
 
 const Team = () => {
 
@@ -41,15 +39,17 @@ const Team = () => {
                 rows.map((currRow, idx) => {
                     if (idx !== rowToEdit) return currRow;
 
+                    {/*
                     console.log(newRow); // this is the row after the changes are made
                     console.log(" ")
                     console.log(currRow); // this is the row before the changes are made
+                */}
 
                     if (newRow.id === currRow.id && newRow.username === currRow.username && newRow.firstName === currRow.firstName && newRow.lastName === currRow.lastName && newRow.email === currRow.email && newRow.address1 === currRow.address1 && newRow.phone === currRow.phone && newRow.status === currRow.status) {
                         console.log("Matches");
                     } else {
                         console.log("Changes have been made");
-                        axios.post('http://10.43.76.36:5001/updateUser', {
+                        axios.post('http://localhost:5001/updateUser', {
                             id: newRow.id,
                             firstName: newRow.firstName,
                             lastName: newRow.lastName,
@@ -57,7 +57,7 @@ const Team = () => {
                             email: newRow.email,
                             phone: newRow.phone,
                             address1: newRow.address1,
-                            status: newRow.status,
+                            status: newRow.status
                         });
                     }
 
